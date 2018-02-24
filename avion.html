@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Animaciones</title>
+	<style type="text/css">
+		#visor{
+			width: 400px;
+			height: 400px;
+			border-radius: 20px;
+			background-color: silver;
+			overflow: hidden;
+			position: absolute;
+		}
+
+		#playa{
+			position: relative;
+			width: 1200px;
+			height: 400px;
+
+			animation-name: playa;
+			animation-duration: 5s;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+
+			-moz-animation-name: playa;
+			-moz-animation-duration: 5s;
+			-moz-animation-iteration-count: infinite;
+			-moz-animation-timing-function: linear;
+
+			-webkit-animation-name: playa;
+			-webkit-animation-duration: 5s;
+			-webkit-animation-iteration-count: infinite;
+			-webkit-animation-timing-function: linear;
+		}
+
+		#avion{
+			position: absolute;
+			top: 30px;
+			left: 140px;
+			width: 50px;
+			
+			animation-name: avion;
+			animation-duration: 10s;
+
+			-moz-animation-name: avion;
+			-moz-animation-duration: 10s;
+
+			-webkit-animation-name: avion;
+			-webkit-animation-duration: 10s;
+		}
+
+		@keyframes playa{
+			from{	left: 0px;	}
+			to{ 	left: -600px; }
+		}
+		
+		@keyframes avion{
+			from{
+				transform: translateX(-140px) translateY(200px) scaleX(2) scaleY(2) rotateZ(-30deg);
+			}
+			to{
+				transform: translateX(0px) translateY(0px) scaleX(1) scaleY(1) rotateZ(0deg);
+			}
+		}
+		
+		@keyframes turbulencias{
+			from{
+				transform: rotateX(-30deg) rotateY(-30deg) rotateZ(-30deg) translateY(0px);
+			}
+			to{
+				transform: rotateX(30deg) rotateY(30deg) rotateZ(30deg) translateY(-10px);
+			}
+		}
+		
+		header{
+			text-align: center;
+			color: white;
+			background-color: #549DDB;
+			border-radius: 10px;
+		}
+		
+		section{
+			width: 100%;
+			background-color: #D0CEB9;
+			text-align: center;
+			border-radius: 5px;
+		}	
+		
+		article{
+			width: 400px;
+			margin: 0px auto;
+		}
+
+		footer{
+			margin: 0px auto;
+			position: relative;
+			top: 420px;
+			height: 80px;
+			width: 400px;
+			text-align: center;
+		}
+
+	</style>
+	
+	<script type="text/javascript">
+		
+		window.onload = function(){
+			fondo = document.getElementById("playa");
+			avi = document.getElementById("avion");
+		}
+
+		function pausar(){
+			fondo.style.animationPlayState = "paused";
+			fondo.style.MozAnimationPlayState = "paused";
+			fondo.style.WebkitAnimationPlayState = "paused";
+
+
+			avi.style.animationPlayState = "paused";
+			avi.style.MozAnimationPlayState = "paused";
+			avi.style.WebkitAnimationPlayState = "paused";
+		}
+
+		function reanudar(){
+			fondo.style.animationPlayState = "running";
+			fondo.style.MozAnimationPlayState = "running";
+			fondo.style.WebkitAnimationPlayState = "running";
+
+			avi.style.animationPlayState = "running";
+			avi.style.MozAnimationPlayState = "running";
+			avi.style.WebkitAnimationPlayState = "running";
+		}
+
+		function velocidad(num){
+			if (num==0) {
+				fondo.style.animationDuration = "5s";
+				fondo.style.MozAnimationDuration = "5s";
+				fondo.style.WebkitAnimationDuration = "5s";
+
+				avion.style.animationName = "recuperado";
+				avion.style.MozAnimationName = "recuperado";
+				avion.style.WebkitAnimationName = "recuperado";
+			}
+
+			if (num==1) {
+				fondo.style.animationDuration = "15s";
+				fondo.style.MozAnimationDuration = "15s";
+				fondo.style.WebkitAnimationDuration = "15s";
+				
+				avion.style.animationName = "turbulencias";
+				avion.style.animationDuration = "1s";
+				avion.style.animationIterationCount = "infinite";
+				avion.style.animationDirection = "alternate";
+
+				avion.style.MozAnimationName = "turbulencias";
+				avion.style.MozAnimationDuration = "1s";
+				avion.style.MozAnimationIterationCount = "infinite";
+				avion.style.MozAnimationDirection = "alternate";
+
+				avion.style.WebkitAnimationName = "turbulencias";
+				avion.style.WebkitAnimationDuration = "1s";
+				avion.style.WebkitAnimationIterationCount = "infinite";
+				avion.style.WebkitAnimationDirection = "alternate";
+			}
+
+			if (num==2) {
+				fondo.style.animationDuration = "1s";
+				fondo.style.MozAnimationDuration = "1s";
+				fondo.style.WebkitAnimationDuration = "1s";
+
+				avion.style.animationName = "recuperado";
+				avion.style.MozAnimationName = "recuperado";
+				avion.style.WebkitAnimationName = "recuperado";
+			}
+			
+		}
+
+
+	</script>
+</head>
+<body>
+	<header><h2>Avión volando</h2></header>
+	<section>
+		<article>
+			<div>
+				<p>
+					<input type="button" name="play" value="Play" onclick="reanudar()">
+					<input type="button" name="pause" value="Pause" onclick="pausar()">
+					Elige la velocidad:
+					<select onchange="velocidad(this.selectedIndex)"" id="lista">
+						<option selected="selected">Normal</option>
+						<option>Turbulencias</option>
+						<option>Turbo</option>
+						
+					</select>
+
+
+				</p>
+			</div>
+			<div id="visor">
+				<img id="playa" src="images/playa.jpg" alt="playa">
+				<img id="avion" src="images/avion.png" alt="avion">
+			</div>
+			
+		</article>
+	</section>
+	<footer>
+		<small>Adrián Javier Rodríguez Sánchez</small>
+	</footer>
+</body>
+</html>
